@@ -29,9 +29,55 @@ namespace TimeAndBilling.Controllers
             });
         }
 
-        public IActionResult Create()
+        public IActionResult Edit(int? id)
+        {
+
+            if (!id.HasValue)
+            {
+                return View();
+            }
+            else
+            {
+                var employee = _employeeRepository.GetEmployeeById(id.Value);
+                return View(employee);
+            }
+        }
+
+        public IActionResult Add()
         {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult Save(Employee employee)
+        {
+            if (ModelState.IsValid)
+            {
+                if (employee.Id > 0)
+                {
+                    //update employee
+                    _employeeRepository.UpdateEmployee(employee);
+                }
+                else
+                {
+                    //Add employee
+                    _employeeRepository.AddNewEmployee(employee);
+                }
+            }
+            return RedirectToAction("List");
+        }
+
+        public IActionResult Delete(int? id)
+        {
+            if (!id.HasValue)
+            {
+                return View();
+            }
+            else
+            {
+                var employees = _employeeRepository.DeleteEmployeeById(id.Value);
+                return RedirectToAction("List");
+            }
         }
     }
 }

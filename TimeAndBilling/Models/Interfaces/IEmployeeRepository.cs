@@ -9,5 +9,11 @@ namespace TimeAndBilling.Models.Repository
     {
         IEnumerable<Employee> GetAllEmployees { get; }
         Employee GetEmployeeById(int employeeId);
+
+        Employee DeleteEmployeeById(int employeeId);
+
+        Employee AddNewEmployee(Employee employee);
+
+        Employee UpdateEmployee(Employee employee);
     }
 }

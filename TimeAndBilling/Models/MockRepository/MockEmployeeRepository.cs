@@ -16,6 +16,32 @@ namespace TimeAndBilling.Models.MockRepository
             new Employee {FirstName = "Sarah", LastName = "Freddy", MiddleName = "", DateOfBirth = new DateTime(1992, 4, 16), Id = 4 }
         };
 
+        public Employee AddNewEmployee(Employee employee)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Employee UpdateEmployee(Employee employee)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        //Function not working correctly.
+        public Employee DeleteEmployeeById(int employeeId)
+        {
+            Employee employees = new Employee();
+            
+            foreach(var item in GetAllEmployees)
+            {
+                if(item.Id != employeeId)
+                {
+                    employees = item;
+                }
+            }
+            return employees;
+        }
+
         public Employee GetEmployeeById(int employeeId)
         {
             return GetAllEmployees.FirstOrDefault(e => e.Id == employeeId);

@@ -8,7 +8,7 @@ namespace TimeAndBilling.Models
     public class TimeEntry
     {
         Employee Employee { get; set; }
-        Project Project { get; set; }
+        List<Project> Projects { get; set; }
         string Description { get; set; }
         decimal Hours { get; set; }
     }

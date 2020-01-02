@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -6,10 +8,9 @@ using System.Threading.Tasks;
 
 namespace TimeAndBilling.Models
 {
-    //Add a new employee 
     public class Employee
     {
-        [Required]
+        [BindNever]
         public int Id { get; set; }
 
         //First Name
@@ -27,8 +28,9 @@ namespace TimeAndBilling.Models
         [Display(Name = "First Name")]
         [StringLength(50)]
         public string LastName { get; set; }
-        
+
         // DOB
+        [DisplayFormat(DataFormatString = "{MM/dd/yyyy}")]
         [Required(ErrorMessage ="Please enter a date of birth")]
         [Display(Name = "Date of Birth")]
         public DateTime DateOfBirth { get; set; }
