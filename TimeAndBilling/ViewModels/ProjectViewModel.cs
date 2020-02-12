@@ -8,6 +8,6 @@ namespace TimeAndBilling.ViewModels
 {
     public class ProjectViewModel
     {
-        IEnumerable<Project> Projects { get; set; }
+        public IEnumerable<Project> Projects { get; set; }
     }
 }

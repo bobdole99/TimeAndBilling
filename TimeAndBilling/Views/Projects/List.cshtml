@@ -1,5 +1,36 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model ProjectViewModel
+
+<h1> Project Listing</h1>
+
+<div>
+    <a class="btn btn-primary" asp-controller="Project" asp-action="Add" role="button">Add New Project</a>
+</div>
+
+
+<table class="table table-hover table-sm">
+    <thead>
+        <tr>
+            <th scope="col">Project Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var project in Model.Projects)
+        {
+            <tr class="table-row">
+                <td> @project.ProjectCode</td>
+                <td> @project.ProjectName</td>
+                <td> @project.ProjectDescription </td>
+                <td>
+                    <div class="Edit">
+                        <p class="button">
+                            <a class="btn btn-info"
+                               asp-controller="Project"
+                               asp-action="Edit"
+                               asp-route-Id="@project.Id">Edit</a>
+                        </p>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
