@@ -7,9 +7,10 @@ namespace TimeAndBilling.Models.Repository.Interfaces
 {
     public interface ITimeEntryRepository
     {
-        IEnumerable<TimeEntry> GetAllTimeEntries { get; set; }
-        IEnumerable<TimeEntry> GetTimeEntriesByEmployeeId(int id);
-        IEnumerable<TimeEntry> GetTimeEntriesByDateRange(DateTime start, DateTime end);
+        IEnumerable<TimeEntry> GetAllTimeEntries { get;}
+
+        TimeEntry AddNewTimeEntry(TimeEntry timeEntry);
+        TimeEntry DeleteTimeEntry(TimeEntry timeEntry);
         
     }
 }

@@ -10,7 +10,6 @@ namespace TimeAndBilling.Models
 {
     public class Employee
     {
-        [BindNever]
         public int Id { get; set; }
 
         //First Name

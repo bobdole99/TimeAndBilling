@@ -49,20 +49,29 @@ namespace TimeAndBilling.Controllers
         }
 
         [HttpPost]
+        public IActionResult Add(Employee employee)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(employee);
+            }
+            else
+            {
+                _employeeRepository.AddNewEmployee(employee);
+            }
+            return RedirectToAction("List");
+        }
+
+        [HttpPost]
         public IActionResult Save(Employee employee)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                if (employee.Id > 0)
-                {
-                    //update employee
-                    _employeeRepository.UpdateEmployee(employee);
-                }
-                else
-                {
-                    //Add employee
-                    _employeeRepository.AddNewEmployee(employee);
-                }
+                return View(employee);
+            }
+            else
+            {
+                _employeeRepository.UpdateEmployee(employee);
             }
             return RedirectToAction("List");
         }
@@ -75,7 +84,7 @@ namespace TimeAndBilling.Controllers
             }
             else
             {
-                var employees = _employeeRepository.DeleteEmployeeById(id.Value);
+                _employeeRepository.DeleteEmployeeById(id.Value);
                 return RedirectToAction("List");
             }
         }

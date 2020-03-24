@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using TimeAndBilling.Models.Repository;
 
 namespace TimeAndBilling.Models.MockRepository
@@ -45,6 +46,11 @@ namespace TimeAndBilling.Models.MockRepository
         public Employee GetEmployeeById(int employeeId)
         {
             return GetAllEmployees.FirstOrDefault(e => e.Id == employeeId);
+        }
+
+        public IEnumerable<SelectListItem> GetEmployeeDropDown()
+        {
+            throw new NotImplementedException();
         }
     }
 }

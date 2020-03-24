@@ -12,6 +12,7 @@ using Microsoft.Extensions.Hosting;
 using TimeAndBilling.Models;
 using TimeAndBilling.Models.MockRepository;
 using TimeAndBilling.Models.Repository;
+using TimeAndBilling.Models.Repository.Interfaces;
 
 namespace TimeAndBilling
 {
@@ -30,6 +31,9 @@ namespace TimeAndBilling
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            services.AddScoped<IProjectRepository, ProjectRepository>();
+            services.AddScoped<ITimeEntryRepository, TimeEntryRepository>();
+
             services.AddControllersWithViews();
         }
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -76,6 +77,28 @@ namespace TimeAndBilling.Models.Repository
         {
             var employee = _context.Employees.FirstOrDefault(e => e.Id == employeeId);
             return employee;
+        }
+
+
+        public IEnumerable<SelectListItem> GetEmployeeDropDown()
+        {
+            List<SelectListItem> countries = _context.Employees
+                .OrderBy(n => n.FirstName)
+                    .Select(n =>
+                    new SelectListItem
+                    {
+                        Value = n.Id.ToString(),
+                        Text = n.FirstName
+                    }).ToList();
+
+
+            var projectTip = new SelectListItem()
+            {
+                Value = null,
+                Text = "--- Select Employee ---"
+            };
+            countries.Insert(0, projectTip);
+            return new SelectList(countries, "Value", "Text");
         }
     }
 }

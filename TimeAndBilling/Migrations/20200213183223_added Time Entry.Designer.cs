@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TimeAndBilling.Models;
 
 namespace TimeAndBilling.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200213183223_added Time Entry")]
+    partial class addedTimeEntry
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -66,7 +68,12 @@ namespace TimeAndBilling.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("TimeEntryId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("TimeEntryId");
 
                     b.ToTable("Employees");
                 });
@@ -90,7 +97,12 @@ namespace TimeAndBilling.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("TimeEntryId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("TimeEntryId");
 
                     b.ToTable("Projects");
                 });
@@ -106,33 +118,47 @@ namespace TimeAndBilling.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("EmployeeId")
+                    b.Property<int?>("EmployeeIDId")
                         .HasColumnType("int");
 
                     b.Property<decimal>("Hours")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("ProjectId")
+                    b.Property<int?>("ProjectIDId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EmployeeId");
+                    b.HasIndex("EmployeeIDId");
 
-                    b.HasIndex("ProjectId");
+                    b.HasIndex("ProjectIDId");
 
                     b.ToTable("TimeEntries");
                 });
 
+            modelBuilder.Entity("TimeAndBilling.Models.Employee", b =>
+                {
+                    b.HasOne("TimeAndBilling.Models.TimeEntry", null)
+                        .WithMany("Employees")
+                        .HasForeignKey("TimeEntryId");
+                });
+
+            modelBuilder.Entity("TimeAndBilling.Models.Project", b =>
+                {
+                    b.HasOne("TimeAndBilling.Models.TimeEntry", null)
+                        .WithMany("Projects")
+                        .HasForeignKey("TimeEntryId");
+                });
+
             modelBuilder.Entity("TimeAndBilling.Models.TimeEntry", b =>
                 {
-                    b.HasOne("TimeAndBilling.Models.Employee", "Employee")
+                    b.HasOne("TimeAndBilling.Models.Employee", "EmployeeID")
                         .WithMany()
-                        .HasForeignKey("EmployeeId");
+                        .HasForeignKey("EmployeeIDId");
 
-                    b.HasOne("TimeAndBilling.Models.Project", "Project")
+                    b.HasOne("TimeAndBilling.Models.Project", "ProjectID")
                         .WithMany()
-                        .HasForeignKey("ProjectId");
+                        .HasForeignKey("ProjectIDId");
                 });
 #pragma warning restore 612, 618
         }

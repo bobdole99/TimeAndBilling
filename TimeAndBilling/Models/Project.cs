@@ -9,7 +9,6 @@ namespace TimeAndBilling.Models
     //Add a new project
     public class Project
     {
-        [Required]
         public int Id { get; set; }
 
         //Project name

@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using TimeAndBilling.Models;
 using TimeAndBilling.Models.Repository;
+using TimeAndBilling.ViewModels;
 
 namespace TimeAndBilling.Controllers
 {
@@ -15,19 +17,56 @@ namespace TimeAndBilling.Controllers
             _projectRepository = projectRepository;
         }
 
-        public IActionResult List()
-        {
-
-        }
-
         public IActionResult Add()
         {
-
+            return View();
         }
 
-        public IActionResult Edit()
+        [HttpPost]
+        public IActionResult Add(Project project)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(project);
+            }
+            else
+            {
+                _projectRepository.AddNewProject(project);
+            }
 
+            return RedirectToAction("List");
+        }
+
+        [HttpPost]
+        public IActionResult Edit(int? id)
+        {
+            if (!id.HasValue)
+            {
+                return View();
+            }
+            else
+            {
+                var project = _projectRepository.GetProjectById(id.Value);
+                return View(project);
+            }
+        }
+
+
+
+        public IActionResult List()
+        {
+            IEnumerable<Project> projects;
+            projects = _projectRepository.GetAllProjects;
+
+            return View(new ProjectViewModel
+            {
+                Projects = projects
+            });
+        }
+
+        public IActionResult Delete(int? id)
+        {
+            return RedirectToAction("List");
         }
     }
 }

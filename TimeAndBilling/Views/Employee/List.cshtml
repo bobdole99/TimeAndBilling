@@ -25,14 +25,25 @@
             <td> @employee.LastName </td>
             <td> @employee.JobTitle </td>
             <td> @employee.IsActive </td>
-            <td> <div class="Edit">
-                <p class="button">
-                    <a class="btn btn-info"
-                       asp-controller="Employee"
-                       asp-action="Edit"
-                       asp-route-Id="@employee.Id">Edit</a>
-                </p>
-            </div>
+            <td>
+                <div class="Edit">
+                    <p class="button">
+                        <a class="btn btn-info"
+                           asp-controller="Employee"
+                           asp-action="Edit"
+                           asp-route-Id="@employee.Id">Edit</a>
+                    </p>
+                </div>
+            </td>
+            <td>
+                <div class="Delete">
+                    <p class="button">
+                        <a class="btn btn-info"
+                           asp-controller="Employee"
+                           asp-action="Delete"
+                           asp-route-Id="@employee.Id">Delete</a>
+                    </p>
+                </div>
             </td>
         </tr>
         }
