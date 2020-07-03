@@ -10,7 +10,7 @@ namespace TimeAndBilling.Models
 {
     public class Employee
     {
-        public int Id { get; set; }
+        public int EmployeeID { get; set; }
 
         //First Name
         [Required(ErrorMessage = "Please enter a first name")]

@@ -37,7 +37,19 @@ namespace TimeAndBilling.Controllers
             return RedirectToAction("List");
         }
 
-        [HttpPost]
+        public IActionResult Update(Project project)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(project);
+            }
+            else
+            {
+                _projectRepository.UpdateProject(project);
+            }
+            return RedirectToAction("List");
+        }
+
         public IActionResult Edit(int? id)
         {
             if (!id.HasValue)
@@ -66,6 +78,14 @@ namespace TimeAndBilling.Controllers
 
         public IActionResult Delete(int? id)
         {
+            if (!id.HasValue)
+            {
+                return View();
+            }
+            else
+            {
+                _projectRepository.DeleteProject(id);
+            }
             return RedirectToAction("List");
         }
     }

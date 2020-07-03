@@ -11,10 +11,10 @@ namespace TimeAndBilling.Models.MockRepository
     {
         public IEnumerable<Employee> GetAllEmployees => new List<Employee>
         {
-            new Employee {FirstName = "Jeff", LastName ="Jameson", MiddleName = "", DateOfBirth= new DateTime(1989, 11, 24), Id = 1 },
-            new Employee {FirstName = "Jane", LastName = "McCabe", MiddleName="Sarah", DateOfBirth = new DateTime(1976, 12, 5), Id = 2},
-            new Employee {FirstName = "Travis", LastName ="Oswald", MiddleName ="John", DateOfBirth = new DateTime(1983, 1, 6), Id = 3 },
-            new Employee {FirstName = "Sarah", LastName = "Freddy", MiddleName = "", DateOfBirth = new DateTime(1992, 4, 16), Id = 4 }
+            new Employee {FirstName = "Jeff", LastName ="Jameson", MiddleName = "", DateOfBirth= new DateTime(1989, 11, 24), EmployeeID = 1 },
+            new Employee {FirstName = "Jane", LastName = "McCabe", MiddleName="Sarah", DateOfBirth = new DateTime(1976, 12, 5), EmployeeID = 2},
+            new Employee {FirstName = "Travis", LastName ="Oswald", MiddleName ="John", DateOfBirth = new DateTime(1983, 1, 6), EmployeeID = 3 },
+            new Employee {FirstName = "Sarah", LastName = "Freddy", MiddleName = "", DateOfBirth = new DateTime(1992, 4, 16), EmployeeID = 4 }
         };
 
         public Employee AddNewEmployee(Employee employee)
@@ -35,7 +35,7 @@ namespace TimeAndBilling.Models.MockRepository
             
             foreach(var item in GetAllEmployees)
             {
-                if(item.Id != employeeId)
+                if(item.EmployeeID != employeeId)
                 {
                     employees = item;
                 }
@@ -45,7 +45,7 @@ namespace TimeAndBilling.Models.MockRepository
 
         public Employee GetEmployeeById(int employeeId)
         {
-            return GetAllEmployees.FirstOrDefault(e => e.Id == employeeId);
+            return GetAllEmployees.FirstOrDefault(e => e.EmployeeID == employeeId);
         }
 
         public IEnumerable<SelectListItem> GetEmployeeDropDown()

@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using TimeAndBilling.Models;
+using TimeAndBilling.Models.Interfaces;
 using TimeAndBilling.Models.MockRepository;
 using TimeAndBilling.Models.Repository;
 using TimeAndBilling.Models.Repository.Interfaces;
@@ -33,6 +34,7 @@ namespace TimeAndBilling
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             services.AddScoped<IProjectRepository, ProjectRepository>();
             services.AddScoped<ITimeEntryRepository, TimeEntryRepository>();
+            services.AddScoped<IAbsenceRepository, AbsenceRepository>();
 
             services.AddControllersWithViews();
         }

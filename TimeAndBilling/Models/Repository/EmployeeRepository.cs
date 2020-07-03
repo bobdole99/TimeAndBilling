@@ -45,7 +45,7 @@ namespace TimeAndBilling.Models.Repository
 
         public Employee DeleteEmployeeById(int employeeId)
         {
-            var employee = _context.Employees.FirstOrDefault(e => e.Id == employeeId);
+            var employee = _context.Employees.FirstOrDefault(e => e.EmployeeID == employeeId);
             _context.Remove(employee);
             _context.SaveChanges();
 
@@ -54,7 +54,7 @@ namespace TimeAndBilling.Models.Repository
 
         public Employee UpdateEmployee(Employee employee)
         {
-            var updateEmployee = _context.Employees.FirstOrDefault(e => e.Id == employee.Id);
+            var updateEmployee = _context.Employees.FirstOrDefault(e => e.EmployeeID == employee.EmployeeID);
 
             updateEmployee.Address = employee.Address;
             updateEmployee.AlternatePhoneNumber = employee.AlternatePhoneNumber;
@@ -75,7 +75,7 @@ namespace TimeAndBilling.Models.Repository
 
         public Employee GetEmployeeById(int employeeId)
         {
-            var employee = _context.Employees.FirstOrDefault(e => e.Id == employeeId);
+            var employee = _context.Employees.FirstOrDefault(e => e.EmployeeID == employeeId);
             return employee;
         }
 
@@ -87,7 +87,7 @@ namespace TimeAndBilling.Models.Repository
                     .Select(n =>
                     new SelectListItem
                     {
-                        Value = n.Id.ToString(),
+                        Value = n.EmployeeID.ToString(),
                         Text = n.FirstName
                     }).ToList();
 

@@ -34,7 +34,7 @@ namespace TimeAndBilling.Models.Repository
 
         public Project UpdateProject(Project project)
         {
-            var updateProject = _context.Projects.FirstOrDefault(p => p.Id == project.Id);
+            var updateProject = _context.Projects.FirstOrDefault(p => p.ProjectID == project.ProjectID);
 
             if (updateProject != null)
             {
@@ -52,7 +52,7 @@ namespace TimeAndBilling.Models.Repository
 
         public Project DeleteProject(int? projectId)
         {
-            var project = _context.Projects.FirstOrDefault(p => p.Id == projectId);
+            var project = _context.Projects.FirstOrDefault(p => p.ProjectID == projectId);
 
             _context.Remove(project);
             _context.SaveChanges();
@@ -72,32 +72,13 @@ namespace TimeAndBilling.Models.Repository
 
         public Project GetProjectById(int? projectId)
         {
-            var project = _context.Projects.FirstOrDefault(p => p.Id == projectId);
+            var project = _context.Projects.FirstOrDefault(p => p.ProjectID == projectId);
             return project;
         }
 
         public IEnumerable<SelectListItem> GetProjectsDropDown()
         {
-
-            List<SelectListItem> countries = _context.Projects
-                .OrderBy(n => n.ProjectName)
-                    .Select(n =>
-                    new SelectListItem
-                    {
-                        Value = n.Id.ToString(),
-                        Text = n.ProjectName
-                    }).ToList();
-
-
-            var projectTip = new SelectListItem()
-            {
-                Value = null,
-                Text = "--- Select Project ---"
-            };
-            countries.Insert(0, projectTip);
-            return new SelectList(countries, "Value", "Text");
-
+            throw new NotImplementedException();
         }
-
     }
 }

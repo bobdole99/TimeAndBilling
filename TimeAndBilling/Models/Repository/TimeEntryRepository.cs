@@ -16,7 +16,9 @@ namespace TimeAndBilling.Models.Repository
             _context = context;
         }
 
-        public IEnumerable<TimeEntry> GetAllTimeEntries => _context.TimeEntries;
+        public IEnumerable<TimeEntry> GetAllTimeEntries => 
+            _context.TimeEntries
+            .Where(p => p.Date >= DateTime.Today && p.Date <=DateTime.Today.AddDays(1));
 
         public TimeEntry AddNewTimeEntry(TimeEntry timeEntry)
         {
@@ -25,7 +27,10 @@ namespace TimeAndBilling.Models.Repository
                 Description = timeEntry.Description,
                 Employee = timeEntry.Employee,
                 Project = timeEntry.Project,
-                Hours = timeEntry.Hours
+                Hours = timeEntry.Hours,
+                ProjectID = timeEntry.ProjectID,
+                EmployeeID = timeEntry.EmployeeID,
+                Date = DateTime.Now
             };
             _context.Add(newTimeEntry);
             _context.SaveChanges();
@@ -35,7 +40,7 @@ namespace TimeAndBilling.Models.Repository
 
         public TimeEntry DeleteTimeEntry(TimeEntry timeEntry)
         {
-            var deleteTimeEntry = _context.TimeEntries.FirstOrDefault(te => te.Id == timeEntry.Id);
+            var deleteTimeEntry = _context.TimeEntries.FirstOrDefault(te => te.TimeEntryID == timeEntry.TimeEntryID);
             _context.Remove(deleteTimeEntry);
             _context.SaveChanges();
 

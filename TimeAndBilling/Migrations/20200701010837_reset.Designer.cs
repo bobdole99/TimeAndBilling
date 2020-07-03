@@ -10,8 +10,8 @@ using TimeAndBilling.Models;
 namespace TimeAndBilling.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20191204203544_initialMigration")]
-    partial class initialMigration
+    [Migration("20200701010837_reset")]
+    partial class reset
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,9 +21,36 @@ namespace TimeAndBilling.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("TimeAndBilling.Models.Absence", b =>
+                {
+                    b.Property<int>("AbsenceID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("EmployeeID")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Reason")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("AbsenceID");
+
+                    b.HasIndex("EmployeeID");
+
+                    b.ToTable("Absences");
+                });
+
             modelBuilder.Entity("TimeAndBilling.Models.Employee", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("EmployeeID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -68,14 +95,14 @@ namespace TimeAndBilling.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("EmployeeID");
 
                     b.ToTable("Employees");
                 });
 
             modelBuilder.Entity("TimeAndBilling.Models.Project", b =>
                 {
-                    b.Property<int>("ProjectId")
+                    b.Property<int>("ProjectID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -92,9 +119,62 @@ namespace TimeAndBilling.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ProjectId");
+                    b.HasKey("ProjectID");
 
                     b.ToTable("Projects");
+                });
+
+            modelBuilder.Entity("TimeAndBilling.Models.TimeEntry", b =>
+                {
+                    b.Property<int>("TimeEntryID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("EmployeeID")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Hours")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("ProjectID")
+                        .HasColumnType("int");
+
+                    b.HasKey("TimeEntryID");
+
+                    b.HasIndex("EmployeeID");
+
+                    b.HasIndex("ProjectID");
+
+                    b.ToTable("TimeEntries");
+                });
+
+            modelBuilder.Entity("TimeAndBilling.Models.Absence", b =>
+                {
+                    b.HasOne("TimeAndBilling.Models.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("TimeAndBilling.Models.TimeEntry", b =>
+                {
+                    b.HasOne("TimeAndBilling.Models.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TimeAndBilling.Models.Project", "Project")
+                        .WithMany()
+                        .HasForeignKey("ProjectID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

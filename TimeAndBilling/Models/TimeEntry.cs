@@ -8,13 +8,13 @@ namespace TimeAndBilling.Models
 {
     public class TimeEntry
     {
-
-        [Required]
-        public int Id { get; set; }
+        public int TimeEntryID { get; set; }
 
         public Employee Employee { get; set; }
+        public int EmployeeID { get; set; }
 
         public Project Project { get; set; }
+        public int ProjectID { get; set; }
 
         [Required(ErrorMessage = "Please provide a description")]
 
@@ -22,6 +22,8 @@ namespace TimeAndBilling.Models
 
         [Required(ErrorMessage = "Enter the number of hours worked on this project")]
         public decimal Hours { get; set; }
+
+        public DateTime Date { get; set; }
 
     }
 }

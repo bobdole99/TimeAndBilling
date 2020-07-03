@@ -63,7 +63,7 @@ namespace TimeAndBilling.Controllers
         }
 
         [HttpPost]
-        public IActionResult Save(Employee employee)
+        public IActionResult Update(Employee employee)
         {
             if (!ModelState.IsValid)
             {

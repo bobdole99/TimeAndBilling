@@ -1,0 +1,48 @@
+﻿@model TimeEntryViewModel
+
+<h1> Project Listing</h1>
+
+<div>
+    <a class="btn btn-primary" asp-controller="TimeEntry" asp-action="Add" role="button">Add New Time Entry</a>
+</div>
+
+
+<table class="table table-hover table-sm">
+    <thead>
+        <tr>
+            <th scope="col">Time Entries</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var entry in Model.TimeEntries)
+        {
+            <tr class="table-row">
+                <td> @entry.EmployeeID</td>
+                <td> @entry.Employee</td>
+                <td> @entry.Project </td>
+                <td> @entry.Hours</td>
+                <td> @entry.Description</td>
+                <td>
+                    <div class="Edit">
+                        <p class="button">
+                            <a class="btn btn-info"
+                               asp-controller="Project"
+                               asp-action="Edit"
+                               asp-route-Id="@entry.TimeEntryID">Edit</a>
+                        </p>
+                    </div>
+                </td>
+                <td>
+                    <div class="Delete">
+                        <p class="button">
+                            <a class="btn btn-info"
+                               asp-controller="Project"
+                               asp-action="Delete"
+                               asp-route-Id="@entry.TimeEntryID">Delete</a>
+                        </p>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
