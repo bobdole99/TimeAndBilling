@@ -24,16 +24,10 @@ namespace TimeAndBilling.Models.Repository
 
             Employee newEmployee = new Employee
             {
-                Address = employee.Address,
-                AlternatePhoneNumber = employee.AlternatePhoneNumber,
-                DateOfBirth = employee.DateOfBirth,
                 FirstName = employee.FirstName,
                 IsActive = employee.IsActive,
                 LastName = employee.LastName,
-                JobTitle = employee.JobTitle,
-                MiddleName = employee.MiddleName,
-                PhoneNumber = employee.PhoneNumber,
-                PostalCode = employee.PostalCode
+                MiddleName = employee.MiddleName
             };
 
             _context.Add(newEmployee);
@@ -56,16 +50,10 @@ namespace TimeAndBilling.Models.Repository
         {
             var updateEmployee = _context.Employees.FirstOrDefault(e => e.EmployeeID == employee.EmployeeID);
 
-            updateEmployee.Address = employee.Address;
-            updateEmployee.AlternatePhoneNumber = employee.AlternatePhoneNumber;
-            updateEmployee.DateOfBirth = employee.DateOfBirth;
             updateEmployee.FirstName = employee.FirstName;
             updateEmployee.IsActive = employee.IsActive;
-            updateEmployee.JobTitle = employee.JobTitle;
             updateEmployee.LastName = employee.LastName;
             updateEmployee.MiddleName = employee.MiddleName;
-            updateEmployee.PhoneNumber = employee.PhoneNumber;
-            updateEmployee.PostalCode = employee.PostalCode;
 
             _context.Update(updateEmployee);
             _context.SaveChanges();

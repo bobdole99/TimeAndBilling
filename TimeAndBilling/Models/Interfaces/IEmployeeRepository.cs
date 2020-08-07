@@ -16,6 +16,7 @@ namespace TimeAndBilling.Models.Repository
         Employee AddNewEmployee(Employee employee);
 
         Employee UpdateEmployee(Employee employee);
+
         IEnumerable<SelectListItem> GetEmployeeDropDown();
     }
 }

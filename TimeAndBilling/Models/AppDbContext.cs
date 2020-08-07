@@ -16,5 +16,6 @@ namespace TimeAndBilling.Models
         public DbSet<Project> Projects { get; set; }
         public DbSet<TimeEntry> TimeEntries { get; set; }
         public DbSet<Absence> Absences { get; set; }
+        public DbSet<EmployeeDetail> EmployeeDetails { get; set; }
     }
 }

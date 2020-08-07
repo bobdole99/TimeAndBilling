@@ -12,7 +12,6 @@
             <th scope="col">First Name</th>
             <th scope="col">Middle Name</th>
             <th scope="col">Last Name</th>
-            <th scope="col">Job Title</th>
             <th scope="col">Is Active</th>
         </tr>
     </thead>
@@ -23,7 +22,6 @@
             <td> @employee.FirstName</td>
             <td> @employee.MiddleName </td>
             <td> @employee.LastName </td>
-            <td> @employee.JobTitle </td>
             <td> @employee.IsActive </td>
             <td>
                 <div class="Edit">
@@ -44,6 +42,15 @@
                            asp-route-Id="@employee.EmployeeID">Delete</a>
                     </p>
                 </div>
+                <div class="Edit Employment Details">
+                    <p class="button">
+                        <a class="btn btn-info"
+                           asp-controller="EmployeeDetail"
+                           asp-action="Edit"
+                           asp-route-Id="@employee.EmployeeID">Delete</a>
+                    </p>
+                </div>
+
             </td>
         </tr>
         }

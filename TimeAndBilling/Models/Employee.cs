@@ -28,34 +28,6 @@ namespace TimeAndBilling.Models
         [StringLength(50)]
         public string LastName { get; set; }
 
-        // DOB
-        [DisplayFormat(DataFormatString = "{MM/dd/yyyy}")]
-        [Required(ErrorMessage ="Please enter a date of birth")]
-        [Display(Name = "Date of Birth")]
-        public DateTime DateOfBirth { get; set; }
-
-        //Address
-        [Required(ErrorMessage = "Please enter a valid address")]
-        [StringLength(100)]
-        public string Address { get; set; }
-
-        //Postal Code
-        [Required(ErrorMessage = "Please enter a valid postal code")]
-        public string PostalCode { get; set; }
-
-        //Home Phone Number
-        [Required(ErrorMessage ="Please enter a valid phone number")]
-        [Display(Name = "Home Phone Number")]
-        public string PhoneNumber { get; set; }
-
-        //Alternate Phone Number
-        public string AlternatePhoneNumber { get; set; }
-
-        //Job Title
-        [Required(ErrorMessage ="Please select a job title")]
-        [Display(Name = "Job Title")]
-        public string JobTitle { get; set; }
-
         //Is Employee active
         public bool IsActive { get; set; }
     }

@@ -37,14 +37,15 @@ namespace TimeAndBilling.Models.Repository
         public IEnumerable<Absence> GetAbsencesByDateRange(DateTime startDate, DateTime endDate)
         {
 
-            IEnumerable<Absence> absencesByDateRange = 
+            IEnumerable<Absence> absencesByDateRange =
                 _context.Absences.Where(a => a.StartDate >= startDate && a.EndDate <= endDate);
             return absencesByDateRange;
         }
 
         public IEnumerable<Absence> GetAbsencesByEmployee(Employee employee)
         {
-            throw new NotImplementedException();
+            var absences = _context.Absences.Where(a => a.EmployeeID == employee.EmployeeID).AsEnumerable<Absence>();
+            return absences;
         }
     }
 }

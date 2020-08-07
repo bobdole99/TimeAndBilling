@@ -62,12 +62,14 @@ namespace TimeAndBilling.Models.Repository
 
         public Project GetProjectByCode(string code)
         {
-            throw new NotImplementedException();
+            var project = _context.Projects.FirstOrDefault(p => p.ProjectCode == code);
+            return project;
         }
 
-        public Project GetProjectByName(string name)
+        public Project GetProjectByName(string projectName)
         {
-            throw new NotImplementedException();
+            var project = _context.Projects.FirstOrDefault(p => p.ProjectName == projectName);
+            return project;
         }
 
         public Project GetProjectById(int? projectId)
