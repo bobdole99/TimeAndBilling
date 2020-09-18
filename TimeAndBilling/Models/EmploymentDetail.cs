@@ -8,9 +8,9 @@ namespace TimeAndBilling.Models
 {
     public class EmploymentDetail
     {
-        Employee EmployeeID { get; }
+        public Employee EmployeeID { get; }
 
-        EmploymentDetail EmploymentDetailID { get; set; }
+        public int EmploymentDetailID { get; set; }
 
         //Job Title
         [Required(ErrorMessage = "Please select a job title")]

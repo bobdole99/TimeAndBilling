@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,8 +9,12 @@ namespace TimeAndBilling.Models
 {
     public class EmployeeDetail
     {
-        public Employee EmployeeID { get; set; }
-        public EmployeeDetail EmployeeDetailID { get; set; }
+        public Employee Employee { get; set; }
+        public int EmployeeDetailID { get; set; }
+
+        //Field to pass full name to employee details page
+        [NotMapped]
+        public string FullName { get; set; }
 
         // DOB
         [DisplayFormat(DataFormatString = "{MM/dd/yyyy}")]

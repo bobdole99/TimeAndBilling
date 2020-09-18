@@ -35,6 +35,7 @@ namespace TimeAndBilling
             services.AddScoped<IProjectRepository, ProjectRepository>();
             services.AddScoped<ITimeEntryRepository, TimeEntryRepository>();
             services.AddScoped<IAbsenceRepository, AbsenceRepository>();
+            services.AddScoped<IEmployeeDetailRepository, EmployeeDetailRepository>(); 
 
             services.AddControllersWithViews();
         }

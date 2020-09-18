@@ -1,0 +1,20 @@
+﻿@model EmployeeDetail
+
+<h1> Employee Detail Information</h1>
+<h3> @Model.FullName</h3>
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" asp-action="Save" role="form">
+
+            <partial name="_EmployeeDetailCard" />
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-5">
+                    <input type="submit" class="btn btn-primary" asp-controller="EmployeeDetail" 
+                           asp-action="Save" asp-route-id="@Model.Employee" value="Save" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
