@@ -4,7 +4,7 @@
 <!-- Search form -->
 <div>
     <div class="form-group">
-        <form class="form-group" method="post" asp-controller="Project" asp-action="Search">
+        <form class="form-group" method="post" asp-controller="Project" asp-action="List">
             <input class="form-control" type="text" placeholder="Search" name="searchString">
             <input class="btn btn-primary" type="submit" value="Search" />
         </form>
@@ -17,10 +17,13 @@
 <table class="table table-hover table-sm">
     <thead>
         <tr>
+            <th scope="col">Project Code</th>
             <th scope="col">Project Name</th>
+            <th scope="col">Project Description</th>
         </tr>
     </thead>
     <tbody>
+        @if (Model.Projects.Count() == 0) @ViewBag.SearchResults 
         @foreach (var project in Model.Projects)
         {
             <tr class="table-row">

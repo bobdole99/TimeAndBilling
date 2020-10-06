@@ -65,11 +65,26 @@ namespace TimeAndBilling.Controllers
         }
 
 
-
-        public IActionResult List()
+        public IActionResult List(string searchString)
         {
             IEnumerable<Project> projects;
-            projects = _projectRepository.GetAllProjects;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                projects = Search(searchString);
+                if(projects.Count() == 0)
+                {
+                    ViewBag.SearchResults = "No search results for: \"" + searchString + "\""; 
+                }
+            }
+            else
+            {
+                projects = _projectRepository.GetAllProjects;
+                if (projects.Count() == 0)
+                {
+                    ViewBag.SearchResults = "No data present in database";
+                }
+            }
 
             return View(new ProjectViewModel
             {
@@ -77,11 +92,6 @@ namespace TimeAndBilling.Controllers
             });
         }
 
-        public IActionResult List(string searchString)
-        {
-
-            return null;
-        }
 
         public IActionResult Delete(int? id)
         {
@@ -109,6 +119,8 @@ namespace TimeAndBilling.Controllers
                 return projectsByCode;
             else if (projectsByCode == null)
                 return projectsByName;
+            else
+                return Enumerable.Empty<Project>();
         }
     }
 }
