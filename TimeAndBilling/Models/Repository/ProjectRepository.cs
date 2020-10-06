@@ -16,7 +16,6 @@ namespace TimeAndBilling.Models.Repository
         }
         public IEnumerable<Project> GetAllProjects => _context.Projects;
 
-
         public Project AddNewProject(Project project)
         {
             Project newProject = new Project
@@ -60,16 +59,16 @@ namespace TimeAndBilling.Models.Repository
             return project;
         }
 
-        public Project GetProjectByCode(string code)
+        public IEnumerable<Project> GetProjectsByCode(string code)
         {
-            var project = _context.Projects.FirstOrDefault(p => p.ProjectCode == code);
-            return project;
+                var projects = _context.Projects.Where(p => p.ProjectCode.Contains(code));
+                return projects;   
         }
 
-        public Project GetProjectByName(string projectName)
+        public IEnumerable<Project> GetProjectsByName(string projectName)
         {
             var project = _context.Projects.FirstOrDefault(p => p.ProjectName == projectName);
-            return project;
+            return null;
         }
 
         public Project GetProjectById(int? projectId)

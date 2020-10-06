@@ -55,19 +55,20 @@ namespace TimeAndBilling.Models.MockRepository
         }
 
 
-        public Project GetProjectByCode(string code)
+        public IEnumerable<Project> GetProjectsByCode(string code)
         {
-            return ProjectList.FirstOrDefault(e => e.ProjectCode == code);
+            return ProjectList.Where(e => e.ProjectCode.Contains(code));
+        }
+
+
+        public IEnumerable<Project> GetProjectsByName(string name)
+        {
+            return ProjectList.Where(e => e.ProjectCode.Contains(name));
         }
 
         public Project GetProjectById(int? projectId)
         {
             return ProjectList.FirstOrDefault(e => e.ProjectID == projectId.Value);
-        }
-
-        public Project GetProjectByName(string name)
-        {
-            return ProjectList.FirstOrDefault(e => e.ProjectName == name);
         }
 
         public IEnumerable<SelectListItem> GetProjectsDropDown()

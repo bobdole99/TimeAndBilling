@@ -1,20 +1,19 @@
 ﻿@model ProjectViewModel
 
 <h1> Project Listing</h1>
+<!-- Search form -->
 <div>
+    <div class="form-group">
+        <form class="form-group" method="post" asp-controller="Project" asp-action="Search">
+            <input class="form-control" type="text" placeholder="Search" name="searchString">
+            <input class="btn btn-primary" type="submit" value="Search" />
+        </form>
+    </div>
     <div>
         <a class="btn btn-primary" asp-controller="Project" asp-action="Add" role="button">Add New Project</a>
     </div>
-
-    <div class="form-group">
-        <!-- Search form -->
-        <form class="form-inline d-flex justify-content-center md-form form-sm">
-            <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search"
-                   aria-label="Search">
-            <i class="fas fa-search" aria-hidden="true"></i>
-        </form>
-    </div>
 </div>
+
 <table class="table table-hover table-sm">
     <thead>
         <tr>

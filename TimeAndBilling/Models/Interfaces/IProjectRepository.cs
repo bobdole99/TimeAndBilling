@@ -10,8 +10,8 @@ namespace TimeAndBilling.Models.Repository
     {
         IEnumerable<Project> GetAllProjects { get;  }
 
-        Project GetProjectByName(string name);
-        Project GetProjectByCode(string code);
+        IEnumerable<Project> GetProjectsByName(string name);
+        IEnumerable<Project> GetProjectsByCode(string code);
 
         Project GetProjectById(int? projectId);
 

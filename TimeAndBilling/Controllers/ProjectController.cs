@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TimeAndBilling.Models;
@@ -76,6 +77,12 @@ namespace TimeAndBilling.Controllers
             });
         }
 
+        public IActionResult List(string searchString)
+        {
+
+            return null;
+        }
+
         public IActionResult Delete(int? id)
         {
             if (!id.HasValue)
@@ -87,6 +94,21 @@ namespace TimeAndBilling.Controllers
                 _projectRepository.DeleteProject(id);
             }
             return RedirectToAction("List");
+        }
+
+        public IEnumerable<Project> Search(string searchString)
+        {
+            string cleanedSearchString = searchString.Trim();
+
+            var projectsByCode = _projectRepository.GetProjectsByCode(cleanedSearchString);
+            var projectsByName = _projectRepository.GetProjectsByName(cleanedSearchString);
+
+            if (projectsByName != null && projectsByCode != null)
+                return projectsByCode.Union(projectsByName);
+            else if (projectsByName == null)
+                return projectsByCode;
+            else if (projectsByCode == null)
+                return projectsByName;
         }
     }
 }
