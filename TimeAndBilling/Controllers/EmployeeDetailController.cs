@@ -48,7 +48,7 @@ namespace TimeAndBilling.Controllers
             {
                 _employeeDetailRepository.UpdateEmployeeDetail(employeeDetail);
             }
-            return View();
+            return RedirectToAction("List", "Employee");
         }
 
         public String GetEmployeeFullName(int id)

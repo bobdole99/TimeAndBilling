@@ -67,7 +67,7 @@ namespace TimeAndBilling.Models.Repository
 
         public IEnumerable<Project> GetProjectsByName(string projectName)
         {
-            var project = _context.Projects.FirstOrDefault(p => p.ProjectName == projectName);
+            var project = _context.Projects.Where(p => p.ProjectName.Contains(projectName));
             return null;
         }
 

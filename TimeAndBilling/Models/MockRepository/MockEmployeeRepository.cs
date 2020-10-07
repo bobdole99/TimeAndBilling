@@ -52,5 +52,15 @@ namespace TimeAndBilling.Models.MockRepository
         {
             throw new NotImplementedException();
         }
+
+        public IEnumerable<Employee> GetEmployeeByLastName(string searchString)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Employee> GetEmployeeByFirstName(string searchString)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

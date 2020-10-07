@@ -25,7 +25,8 @@ namespace TimeAndBilling.Models.Repository
                 EmergencyPhoneNumber = employeeDetail.EmergencyPhoneNumber,
                 City = employeeDetail.City,
                 ProvinceState = employeeDetail.ProvinceState,
-                Country = employeeDetail.Country
+                Country = employeeDetail.Country,
+                Employee = employeeDetail.Employee
             };
             _context.Add(newDetail);
             _context.SaveChanges();

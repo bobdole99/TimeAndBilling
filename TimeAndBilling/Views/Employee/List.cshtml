@@ -1,7 +1,18 @@
 ﻿@model EmployeeViewModel
 
 <h1> Employee Listing</h1>
-
+<div class="form-group">
+    <form class="form-group" method="post" asp-controller="Employee" asp-action="List">
+        <div>
+            <input class="form-control" type="text" placeholder="Search" name="searchString">
+            <input class="btn btn-primary" type="submit" value="Search" />
+        </div>
+        <div>
+            <input class="form-check-input" type="checkbox" id="showInactive" name="showInactive"/>
+            <label class="form-check-label" for="showInactive">Show Inactive</label>
+        </div>
+    </form>
+</div>
 <div>
     <a class="btn btn-primary" asp-controller="Employee" asp-action="Add" role="button">Add New Employee</a>
 </div>
@@ -18,42 +29,42 @@
     <tbody>
         @foreach (var employee in Model.Employees)
         {
-        <tr class="table-row">
-            <td> @employee.FirstName</td>
-            <td> @employee.MiddleName </td>
-            <td> @employee.LastName </td>
-            <td> @employee.IsActive </td>
-            <td>
-                <div class="Edit">
-                    <p class="button">
-                        <a class="btn btn-info"
-                           asp-controller="Employee"
-                           asp-action="Edit"
-                           asp-route-Id="@employee.EmployeeID">Edit</a>
-                    </p>
-                </div>
-            </td>
-            <td>
-                <div class="Delete">
-                    <p class="button">
-                        <a class="btn btn-info"
-                           asp-controller="Employee"
-                           asp-action="Delete"
-                           asp-route-Id="@employee.EmployeeID">Delete</a>
-                    </p>
-                </div>
-            </td>
-            <td>
-                <div class="Edit">
-                    <p class="button">
-                        <a class="btn btn-info"
-                           asp-controller="EmployeeDetail"
-                           asp-action="Edit"
-                           asp-route-Id="@employee.EmployeeID">Edit Details</a>
-                    </p>
-                </div>
-            </td>
-        </tr>
+            <tr class="table-row">
+                <td> @employee.FirstName</td>
+                <td> @employee.MiddleName </td>
+                <td> @employee.LastName </td>
+                <td> @employee.IsActive </td>
+                <td>
+                    <div class="Edit">
+                        <p class="button">
+                            <a class="btn btn-info"
+                               asp-controller="Employee"
+                               asp-action="Edit"
+                               asp-route-Id="@employee.EmployeeID">Edit</a>
+                        </p>
+                    </div>
+                </td>
+                <td>
+                    <div class="Delete">
+                        <p class="button">
+                            <a class="btn btn-info"
+                               asp-controller="Employee"
+                               asp-action="Delete"
+                               asp-route-Id="@employee.EmployeeID">Delete</a>
+                        </p>
+                    </div>
+                </td>
+                <td>
+                    <div class="Edit">
+                        <p class="button">
+                            <a class="btn btn-info"
+                               asp-controller="EmployeeDetail"
+                               asp-action="Edit"
+                               asp-route-Id="@employee.EmployeeID">Edit Details</a>
+                        </p>
+                    </div>
+                </td>
+            </tr>
         }
     </tbody>
 </table>

@@ -19,6 +19,30 @@ namespace TimeAndBilling.Models.Repository
         public IEnumerable<Employee> GetAllEmployees => _context.Employees;
 
 
+        public IEnumerable<Employee> GetEmployeeByLastName(string searchString)
+        {
+            var employees = _context.Employees.Where(e => e.LastName.Contains(searchString));
+            return employees;
+        }
+
+
+        public IEnumerable<Employee> GetEmployeeByFirstName(string searchString)
+        {
+            var employees = _context.Employees.Where(e => e.FirstName.Contains(searchString));
+            return employees;
+        }
+
+
+        public Employee DeleteEmployeeById(int employeeId)
+        {
+            var employee = _context.Employees.FirstOrDefault(e => e.EmployeeID == employeeId);
+            _context.Remove(employee);
+            _context.SaveChanges();
+
+            return employee;
+        }
+
+
         public Employee AddNewEmployee(Employee employee)
         {
 
@@ -37,15 +61,6 @@ namespace TimeAndBilling.Models.Repository
         }
 
 
-        public Employee DeleteEmployeeById(int employeeId)
-        {
-            var employee = _context.Employees.FirstOrDefault(e => e.EmployeeID == employeeId);
-            _context.Remove(employee);
-            _context.SaveChanges();
-
-            return employee;
-        }
-
         public Employee UpdateEmployee(Employee employee)
         {
             var updateEmployee = _context.Employees.FirstOrDefault(e => e.EmployeeID == employee.EmployeeID);
@@ -60,6 +75,7 @@ namespace TimeAndBilling.Models.Repository
 
             return updateEmployee;
         }
+
 
         public Employee GetEmployeeById(int employeeId)
         {
