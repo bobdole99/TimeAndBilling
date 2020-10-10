@@ -10,6 +10,7 @@ namespace TimeAndBilling.Models
     public class EmployeeDetail
     {
         public Employee Employee { get; set; }
+        public int EmployeeID { get; set; }
         public int EmployeeDetailID { get; set; }
 
         //Field to pass full name to employee details page

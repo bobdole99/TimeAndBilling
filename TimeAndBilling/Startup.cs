@@ -35,7 +35,8 @@ namespace TimeAndBilling
             services.AddScoped<IProjectRepository, ProjectRepository>();
             services.AddScoped<ITimeEntryRepository, TimeEntryRepository>();
             services.AddScoped<IAbsenceRepository, AbsenceRepository>();
-            services.AddScoped<IEmployeeDetailRepository, EmployeeDetailRepository>(); 
+            services.AddScoped<IEmployeeDetailRepository, EmployeeDetailRepository>();
+            services.AddScoped<IEmploymentDetailRepository, EmploymentDetailRepository>();
 
             services.AddControllersWithViews();
         }
@@ -60,6 +61,7 @@ namespace TimeAndBilling
 
             app.UseAuthorization();
 
+            //Most specific routes belong first
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

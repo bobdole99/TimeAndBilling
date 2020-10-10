@@ -1,32 +1,34 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Threading;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using TimeAndBilling.Models;
 using TimeAndBilling.Models.Interfaces;
 using TimeAndBilling.Models.Repository;
 
 namespace TimeAndBilling.Controllers
 {
-    public class EmployeeDetailController : Controller
+    public class EmploymentDetailController : Controller
     {
-        private readonly IEmployeeDetailRepository _employeeDetailRepository;
         private readonly IEmployeeRepository _employeeRepository;
+        private readonly IEmploymentDetailRepository _employmentDetailRepository;
 
-        public EmployeeDetailController(IEmployeeDetailRepository employeeDetailRepository, IEmployeeRepository employeeRepository)
+        public EmploymentDetailController(IEmploymentDetailRepository employmentDetailRepository, IEmployeeRepository employeeRepository)
         {
-            _employeeDetailRepository = employeeDetailRepository;
             _employeeRepository = employeeRepository;
+            _employmentDetailRepository = employmentDetailRepository;
         }
 
-        public IActionResult Edit(int? id)
+        public IActionResult Edit (int? id)
         {
-            int employeeId = 0; 
+            int employeeId = 0;
             if (id.HasValue)
             {
                 employeeId = id.Value;
             }
-            var employeeDetail = _employeeDetailRepository.GetEmployeeDetailById(employeeId);
-            
+            var employeeDetail = _employmentDetailRepository.GetEmploymentDetailById(employeeId);
+
             String fullName = GetEmployeeFullName(employeeId);
 
             if (employeeDetail != null)
@@ -36,32 +38,35 @@ namespace TimeAndBilling.Controllers
             }
             else
             {
-                return View(new EmployeeDetail()  { 
+                return View(new EmploymentDetail()
+                {
                     FullName = fullName,
                     EmployeeID = employeeId
                 });
             }
         }
 
-        public IActionResult Save(EmployeeDetail employeeDetail)
+        
+        public IActionResult Save(EmploymentDetail employmentDetail)
         {
-            //potentially change this later to get the employee detail first
+            //potentially change this later to get the employment detail first
             //check if exists first, if it doesn't add new if it does update existing
-            if (employeeDetail.EmployeeDetailID == 0)
+            if (employmentDetail.EmploymentDetailID == 0)
             {
-                _employeeDetailRepository.AddEmployeeDetail(employeeDetail);
+                _employmentDetailRepository.AddEmploymentDetail(employmentDetail);
             }
-            else if (employeeDetail.EmployeeDetailID > 0)
+            else if (employmentDetail.EmploymentDetailID > 0)
             {
-                _employeeDetailRepository.UpdateEmployeeDetail(employeeDetail);
+                _employmentDetailRepository.UpdateEmploymentDetail(employmentDetail);
             }
             return RedirectToAction("List", "Employee");
         }
 
-        public String GetEmployeeFullName(int id)
+        private String GetEmployeeFullName(int id)
         {
             var employee = _employeeRepository.GetEmployeeById(id);
             String fullName = String.Empty;
+
             if (employee != null)
             {
                 fullName = employee.FirstName + " " + employee.LastName;

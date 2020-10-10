@@ -26,7 +26,7 @@ namespace TimeAndBilling.Models.Repository
                 City = employeeDetail.City,
                 ProvinceState = employeeDetail.ProvinceState,
                 Country = employeeDetail.Country,
-                Employee = employeeDetail.Employee
+                EmployeeID = employeeDetail.EmployeeID
             };
             _context.Add(newDetail);
             _context.SaveChanges();
@@ -36,9 +36,9 @@ namespace TimeAndBilling.Models.Repository
 
         public EmployeeDetail GetEmployeeDetailById(int id)
         {
-            var employmentDetail =
+            var employeeDetail =
                 _context.EmployeeDetails.FirstOrDefault(e => e.Employee.EmployeeID == id);
-            return employmentDetail;
+            return employeeDetail;
         }
 
         public EmployeeDetail UpdateEmployeeDetail(EmployeeDetail employeeDetail)

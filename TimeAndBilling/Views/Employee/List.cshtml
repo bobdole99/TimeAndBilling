@@ -29,42 +29,52 @@
     <tbody>
         @foreach (var employee in Model.Employees)
         {
-            <tr class="table-row">
-                <td> @employee.FirstName</td>
-                <td> @employee.MiddleName </td>
-                <td> @employee.LastName </td>
-                <td> @employee.IsActive </td>
-                <td>
-                    <div class="Edit">
-                        <p class="button">
-                            <a class="btn btn-info"
-                               asp-controller="Employee"
-                               asp-action="Edit"
-                               asp-route-Id="@employee.EmployeeID">Edit</a>
-                        </p>
-                    </div>
-                </td>
-                <td>
-                    <div class="Delete">
-                        <p class="button">
-                            <a class="btn btn-info"
-                               asp-controller="Employee"
-                               asp-action="Delete"
-                               asp-route-Id="@employee.EmployeeID">Delete</a>
-                        </p>
-                    </div>
-                </td>
-                <td>
-                    <div class="Edit">
-                        <p class="button">
-                            <a class="btn btn-info"
-                               asp-controller="EmployeeDetail"
-                               asp-action="Edit"
-                               asp-route-Id="@employee.EmployeeID">Edit Details</a>
-                        </p>
-                    </div>
-                </td>
-            </tr>
+        <tr class="table-row">
+            <td> @employee.FirstName</td>
+            <td> @employee.MiddleName </td>
+            <td> @employee.LastName </td>
+            <td> @employee.IsActive </td>
+            <td>
+                <div class="Edit">
+                    <p class="button">
+                        <a class="btn btn-info"
+                           asp-controller="Employee"
+                           asp-action="Edit"
+                           asp-route-Id="@employee.EmployeeID">Edit Employee</a>
+                    </p>
+                </div>
+            </td>
+            <td>
+                <div class="Delete">
+                    <p class="button">
+                        <a class="btn btn-info"
+                           asp-controller="Employee"
+                           asp-action="Delete"
+                           asp-route-Id="@employee.EmployeeID">Delete</a>
+                    </p>
+                </div>
+            </td>
+            <td>
+                <div class="Edit">
+                    <p class="button">
+                        <a class="btn btn-info"
+                           asp-controller="EmployeeDetail"
+                           asp-action="Edit"
+                           asp-route-Id="@employee.EmployeeID">Edit Employee Details</a>
+                    </p>
+                </div>
+            </td>
+            <td>
+                <div class="Edit">
+                    <p class="button">
+                        <a class="btn btn-info"
+                           asp-controller="EmploymentDetail"
+                           asp-action="Edit"
+                           asp-route-Id="@employee.EmployeeID">Edit Employement Details</a>
+                    </p>
+                </div>
+            </td>
+        </tr>
         }
     </tbody>
 </table>
