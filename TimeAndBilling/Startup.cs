@@ -30,13 +30,11 @@ namespace TimeAndBilling
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-
-            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             services.AddScoped<IProjectRepository, ProjectRepository>();
             services.AddScoped<ITimeEntryRepository, TimeEntryRepository>();
             services.AddScoped<IAbsenceRepository, AbsenceRepository>();
-            services.AddScoped<IEmployeeDetailRepository, EmployeeDetailRepository>();
-            services.AddScoped<IEmploymentDetailRepository, EmploymentDetailRepository>();
+
+            AddEmployeeServices(services);
 
             services.AddControllersWithViews();
         }
@@ -68,6 +66,14 @@ namespace TimeAndBilling
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+        }
+
+        private void AddEmployeeServices(IServiceCollection services)
+        {
+            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            services.AddScoped<IEmployeeDetailRepository, EmployeeDetailRepository>();
+            services.AddScoped<IEmploymentDetailRepository, EmploymentDetailRepository>();
+            services.AddScoped<IEmployeeBankingRepository, EmployeeBankingRepository>();
         }
     }
 }

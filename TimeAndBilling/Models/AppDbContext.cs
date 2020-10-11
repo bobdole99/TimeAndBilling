@@ -18,5 +18,6 @@ namespace TimeAndBilling.Models
         public DbSet<Absence> Absences { get; set; }
         public DbSet<EmployeeDetail> EmployeeDetails { get; set; }
         public DbSet<EmploymentDetail> EmploymentDetails { get; set; }
+        public DbSet<EmployeeBanking> EmployeeBankings { get; set; }
     }
 }
