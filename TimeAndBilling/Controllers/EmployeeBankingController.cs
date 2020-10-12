@@ -1,15 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using TimeAndBilling.Controllers.Common;
 using TimeAndBilling.Models;
 using TimeAndBilling.Models.Interfaces;
 using TimeAndBilling.Models.Repository;
 
 namespace TimeAndBilling.Controllers
 {
-    public class EmployeeBankingController : Controller
+    public class EmployeeBankingController : EmployeeCommon
     {
         private readonly IEmployeeRepository _employeeRepository;
         private readonly IEmployeeBankingRepository _employeeBankingRepository;
@@ -27,14 +25,14 @@ namespace TimeAndBilling.Controllers
             {
                 employeeId = id.Value;
             }
-            var employeeDetail = _employeeBankingRepository.GetEmployeeBankingInformationById(employeeId);
+            var employeeBankingInformation = _employeeBankingRepository.GetEmployeeBankingInformationById(employeeId);
 
             String fullName = GetEmployeeFullName(employeeId);
 
-            if (employeeDetail != null)
+            if (employeeBankingInformation != null)
             {
-                employeeDetail.FullName = fullName;
-                return View(employeeDetail);
+                employeeBankingInformation.FullName = fullName;
+                return View(employeeBankingInformation);
             }
             else
             {
@@ -49,13 +47,12 @@ namespace TimeAndBilling.Controllers
         
         public IActionResult Save(EmployeeBanking employeeBanking)
         {
-            //potentially change this later to get the employment detail first
-            //check if exists first, if it doesn't add new if it does update existing
-            if (employeeBanking.EmployeeBankingID == 0)
+            var employeeBankingInformation = _employeeBankingRepository.GetEmployeeBankingInformationById(employeeBanking.EmployeeBankingID);
+            if (employeeBankingInformation == null)
             {
                 _employeeBankingRepository.AddEmployeeBankingInformation(employeeBanking);
             }
-            else if (employeeBanking.EmployeeBankingID > 0)
+            else
             {
                 _employeeBankingRepository.UpdateEmployeeBankingInformation(employeeBanking);
             }

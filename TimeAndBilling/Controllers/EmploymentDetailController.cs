@@ -1,15 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using TimeAndBilling.Controllers.Common;
 using TimeAndBilling.Models;
 using TimeAndBilling.Models.Interfaces;
 using TimeAndBilling.Models.Repository;
 
 namespace TimeAndBilling.Controllers
 {
-    public class EmploymentDetailController : Controller
+    public class EmploymentDetailController : EmployeeCommon
     {
         private readonly IEmployeeRepository _employeeRepository;
         private readonly IEmploymentDetailRepository _employmentDetailRepository;
@@ -27,14 +25,14 @@ namespace TimeAndBilling.Controllers
             {
                 employeeId = id.Value;
             }
-            var employeeDetail = _employmentDetailRepository.GetEmploymentDetailById(employeeId);
+            var employmentDetail = _employmentDetailRepository.GetEmploymentDetailById(employeeId);
 
             String fullName = GetEmployeeFullName(employeeId);
 
-            if (employeeDetail != null)
+            if (employmentDetail != null)
             {
-                employeeDetail.FullName = fullName;
-                return View(employeeDetail);
+                employmentDetail.FullName = fullName;
+                return View(employmentDetail);
             }
             else
             {
@@ -49,13 +47,12 @@ namespace TimeAndBilling.Controllers
         
         public IActionResult Save(EmploymentDetail employmentDetail)
         {
-            //potentially change this later to get the employment detail first
-            //check if exists first, if it doesn't add new if it does update existing
-            if (employmentDetail.EmploymentDetailID == 0)
+            var employmentDetails = _employmentDetailRepository.GetEmploymentDetailById(employmentDetail.EmploymentDetailID);
+            if (employmentDetails == null)
             {
                 _employmentDetailRepository.AddEmploymentDetail(employmentDetail);
             }
-            else if (employmentDetail.EmploymentDetailID > 0)
+            else
             {
                 _employmentDetailRepository.UpdateEmploymentDetail(employmentDetail);
             }

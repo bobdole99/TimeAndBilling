@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Threading;
+using TimeAndBilling.Controllers.Common;
 using TimeAndBilling.Models;
 using TimeAndBilling.Models.Interfaces;
 using TimeAndBilling.Models.Repository;
 
 namespace TimeAndBilling.Controllers
 {
-    public class EmployeeDetailController : Controller
+    public class EmployeeDetailController : EmployeeCommon
     {
         private readonly IEmployeeDetailRepository _employeeDetailRepository;
         private readonly IEmployeeRepository _employeeRepository;
@@ -45,13 +45,12 @@ namespace TimeAndBilling.Controllers
 
         public IActionResult Save(EmployeeDetail employeeDetail)
         {
-            //potentially change this later to get the employee detail first
-            //check if exists first, if it doesn't add new if it does update existing
-            if (employeeDetail.EmployeeDetailID == 0)
+            var employeeDetails = _employeeDetailRepository.GetEmployeeDetailById(employeeDetail.EmployeeDetailID);
+            if (employeeDetails == null)
             {
                 _employeeDetailRepository.AddEmployeeDetail(employeeDetail);
             }
-            else if (employeeDetail.EmployeeDetailID > 0)
+            else
             {
                 _employeeDetailRepository.UpdateEmployeeDetail(employeeDetail);
             }
