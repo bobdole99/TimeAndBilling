@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.DataProtection;
-using System.Linq;
+﻿using System.Linq;
 using TimeAndBilling.Models.Interfaces;
 
 namespace TimeAndBilling.Models.Repository
@@ -43,8 +42,7 @@ namespace TimeAndBilling.Models.Repository
 
         public EmployeeDetail UpdateEmployeeDetail(EmployeeDetail employeeDetail)
         {
-            var updateEmployeeDetails = _context.EmployeeDetails.FirstOrDefault
-                (e => e.EmployeeDetailID == employeeDetail.EmployeeDetailID);
+            var updateEmployeeDetails = _context.EmployeeDetails.FirstOrDefault(e => e.EmployeeDetailID == employeeDetail.EmployeeDetailID);
 
             updateEmployeeDetails.Address = employeeDetail.Address;
             updateEmployeeDetails.AlternatePhoneNumber = employeeDetail.AlternatePhoneNumber;
@@ -60,6 +58,16 @@ namespace TimeAndBilling.Models.Repository
             _context.SaveChanges();
 
             return updateEmployeeDetails;
+        }
+
+        public void DeleteEmployeeDetail(int id)
+        {
+            var employeeDetails = _context.EmployeeDetails.FirstOrDefault(e => e.EmployeeDetailID == id);
+            if(employeeDetails != null)
+            {
+                _context.Remove(employeeDetails);
+                _context.SaveChanges();
+            }
         }
     }
 }

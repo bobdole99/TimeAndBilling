@@ -5,5 +5,6 @@
         EmployeeDetail GetEmployeeDetailById(int id);
         EmployeeDetail AddEmployeeDetail(EmployeeDetail employeeDetail);
         EmployeeDetail UpdateEmployeeDetail(EmployeeDetail employeeDetail);
+        void DeleteEmployeeDetail(int id);
     }
 }

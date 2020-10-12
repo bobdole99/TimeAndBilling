@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using TimeAndBilling.Models.Interfaces;
 
 namespace TimeAndBilling.Models.Repository
@@ -25,7 +23,8 @@ namespace TimeAndBilling.Models.Repository
                 NameOfBank = employeeBanking.NameOfBank,
                 PostalCode = employeeBanking.PostalCode,
                 Province = employeeBanking.Province,
-                TransitNumber = employeeBanking.TransitNumber
+                TransitNumber = employeeBanking.TransitNumber,
+                EmployeeID = employeeBanking.EmployeeID
             };
             _context.Add(newEmployeeBanking);
             _context.SaveChanges();
@@ -55,6 +54,16 @@ namespace TimeAndBilling.Models.Repository
         {
             var employeeBankingInformation = _context.EmployeeBankings.FirstOrDefault(e => e.EmployeeID == id);
             return employeeBankingInformation;
+        }
+
+        public void DeleteEmployeeBankingInformation(int id)
+        {
+            var employeeBankingInformation = _context.EmployeeBankings.FirstOrDefault(e => e.EmployeeID == id);
+            if (employeeBankingInformation != null)
+            {
+                _context.Remove(employeeBankingInformation);
+                _context.SaveChanges();
+            }
         }
     }
 }

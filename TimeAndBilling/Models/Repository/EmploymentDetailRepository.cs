@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using TimeAndBilling.Models.Interfaces;
 
 namespace TimeAndBilling.Models.Repository
@@ -56,6 +54,16 @@ namespace TimeAndBilling.Models.Repository
         {
             var employmentDetail = _context.EmploymentDetails.FirstOrDefault(e => e.EmployeeID == id);
             return employmentDetail;
+        }
+
+        public void DeleteEmploymentDetail(int id)
+        {
+            var employmentDetail = _context.EmploymentDetails.FirstOrDefault(e => e.EmployeeID == id);
+            if (employmentDetail != null)
+            {
+                _context.Remove(employmentDetail);
+                _context.SaveChanges();
+            }
         }
     }
 }

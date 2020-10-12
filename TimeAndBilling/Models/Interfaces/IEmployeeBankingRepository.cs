@@ -5,5 +5,6 @@
         EmployeeBanking GetEmployeeBankingInformationById(int id);
         EmployeeBanking AddEmployeeBankingInformation(EmployeeBanking employeeBanking);
         EmployeeBanking UpdateEmployeeBankingInformation(EmployeeBanking employeeBanking);
+        void DeleteEmployeeBankingInformation(int id);
     }
 }

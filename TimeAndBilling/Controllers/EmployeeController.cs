@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TimeAndBilling.Models;
+using TimeAndBilling.Models.Interfaces;
 using TimeAndBilling.Models.Repository;
 using TimeAndBilling.ViewModels;
 
@@ -11,9 +12,20 @@ namespace TimeAndBilling.Controllers
     public class EmployeeController : Controller
     {
         private readonly IEmployeeRepository _employeeRepository;
-        public EmployeeController(IEmployeeRepository employeeRepository)
+        private readonly IEmployeeDetailRepository _employeeDetailRepository;
+        private readonly IEmploymentDetailRepository _employmentDetailRepository;
+        private readonly IEmployeeBankingRepository _employeeBankingRepository;
+
+
+        public EmployeeController(IEmployeeRepository employeeRepository, 
+            IEmployeeDetailRepository employeeDetailRepository, 
+            IEmploymentDetailRepository employmentDetailRepository, 
+            IEmployeeBankingRepository employeeBankingRepository)
         {
             _employeeRepository = employeeRepository;
+            _employeeDetailRepository = employeeDetailRepository;
+            _employmentDetailRepository = employmentDetailRepository;
+            _employeeBankingRepository = employeeBankingRepository;
         }
 
 
@@ -24,23 +36,16 @@ namespace TimeAndBilling.Controllers
             bool isShowInactiveChecked = String.IsNullOrEmpty(showInactive) ? false : true;
             bool hasSearchString = String.IsNullOrEmpty(searchString) ? false : true; 
 
-            //show inactive not checked but a search string is provided
             if (!isShowInactiveChecked && hasSearchString)
             {
-                var employeesByFirstName = _employeeRepository
-                    .GetEmployeeByFirstName(searchString.Trim())
-                    .Where(employee => employee.IsActive == true);
-
-                var employeesByLastName = _employeeRepository
-                    .GetEmployeeByLastName(searchString.Trim())
-                    .Where(employee => employee.IsActive == true);
+                var employeesByFirstName = _employeeRepository.GetEmployeeByFirstName(searchString.Trim()).Where(employee => employee.IsActive == true);
+                var employeesByLastName = _employeeRepository.GetEmployeeByLastName(searchString.Trim()).Where(employee => employee.IsActive == true);
 
                 employees = employeesByFirstName.Union(employeesByLastName);
                 
                 return View(new EmployeeViewModel{Employees = employees});
             }
 
-            //show inactive checked but no search string provided
             if (isShowInactiveChecked && !hasSearchString)
             {
                 employees = _employeeRepository.GetAllEmployees;
@@ -48,7 +53,6 @@ namespace TimeAndBilling.Controllers
                 return View(new EmployeeViewModel{Employees = employees});
             }
 
-            //show inactive checkbox and a search string is entered
             if(isShowInactiveChecked && hasSearchString){
 
                 var employeesByFirstName = _employeeRepository.GetEmployeeByFirstName(searchString.Trim());
@@ -59,7 +63,6 @@ namespace TimeAndBilling.Controllers
                 return View(new EmployeeViewModel{Employees = employees});
             }
 
-            //By default return all active employees
             employees = _employeeRepository.GetAllEmployees.Where(employee => employee.IsActive == true);
             return View(new EmployeeViewModel{Employees = employees});
         }
@@ -123,7 +126,12 @@ namespace TimeAndBilling.Controllers
             }
             else
             {
+                //order is important here employeeRepository.DeleteEmployeeById must be last
+                _employeeBankingRepository.DeleteEmployeeBankingInformation(id.Value);
+                _employeeDetailRepository.DeleteEmployeeDetail(id.Value);
+                _employmentDetailRepository.DeleteEmploymentDetail(id.Value);
                 _employeeRepository.DeleteEmployeeById(id.Value);
+
                 return RedirectToAction("List");
             }
         }
