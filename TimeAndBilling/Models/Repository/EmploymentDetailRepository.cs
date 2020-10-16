@@ -22,8 +22,11 @@ namespace TimeAndBilling.Models.Repository
                 LeaveDate = employmentDetail.LeaveDate,  
                 Manager = employmentDetail.Manager,
                 Salary = employmentDetail.Salary,
+                SSN = employmentDetail.SSN,
                 StartDate = employmentDetail.StartDate,
-                EmployeeID = employmentDetail.EmployeeID
+                EmployeeID = employmentDetail.EmployeeID,
+                EmployeeNumber = employmentDetail.EmployeeNumber,
+                WorkEmail = employmentDetail.WorkEmail
 
             };
 
@@ -43,7 +46,10 @@ namespace TimeAndBilling.Models.Repository
             updateEmploymentDetail.JobTitle = employmentDetail.JobTitle;
             updateEmploymentDetail.LeaveDate = employmentDetail.LeaveDate;
             updateEmploymentDetail.Manager = employmentDetail.Manager;
+            updateEmploymentDetail.SSN = employmentDetail.SSN;
             updateEmploymentDetail.StartDate = employmentDetail.StartDate;
+            updateEmploymentDetail.WorkEmail = employmentDetail.WorkEmail;
+            updateEmploymentDetail.EmployeeNumber = employmentDetail.EmployeeNumber;
 
             _context.Update(updateEmploymentDetail);
             _context.SaveChanges();

@@ -30,5 +30,12 @@ namespace TimeAndBilling.Models
 
         //Is Employee active
         public bool IsActive { get; set; }
+
+        //Email
+        [Display(Name ="Personal Email")]
+        public string PersonalEmail { get; set; }
+
+        //Title
+        public string Title { get; set; }
     }
 }

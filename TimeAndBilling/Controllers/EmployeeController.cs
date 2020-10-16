@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TimeAndBilling.Controllers.Common;
 using TimeAndBilling.Models;
 using TimeAndBilling.Models.Interfaces;
 using TimeAndBilling.Models.Repository;
@@ -9,7 +10,7 @@ using TimeAndBilling.ViewModels;
 
 namespace TimeAndBilling.Controllers
 {
-    public class EmployeeController : Controller
+    public class EmployeeController : EmployeeCommon
     {
         private readonly IEmployeeRepository _employeeRepository;
         private readonly IEmployeeDetailRepository _employeeDetailRepository;

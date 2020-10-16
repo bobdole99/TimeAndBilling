@@ -51,7 +51,9 @@ namespace TimeAndBilling.Models.Repository
                 FirstName = employee.FirstName,
                 IsActive = employee.IsActive,
                 LastName = employee.LastName,
-                MiddleName = employee.MiddleName
+                MiddleName = employee.MiddleName,
+                PersonalEmail = employee.PersonalEmail,
+                Title = employee.Title
             };
 
             _context.Add(newEmployee);
@@ -69,6 +71,7 @@ namespace TimeAndBilling.Models.Repository
             updateEmployee.IsActive = employee.IsActive;
             updateEmployee.LastName = employee.LastName;
             updateEmployee.MiddleName = employee.MiddleName;
+            updateEmployee.PersonalEmail = employee.PersonalEmail;
 
             _context.Update(updateEmployee);
             _context.SaveChanges();

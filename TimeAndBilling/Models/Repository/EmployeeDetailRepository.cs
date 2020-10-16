@@ -25,7 +25,10 @@ namespace TimeAndBilling.Models.Repository
                 City = employeeDetail.City,
                 ProvinceState = employeeDetail.ProvinceState,
                 Country = employeeDetail.Country,
-                EmployeeID = employeeDetail.EmployeeID
+                EmployeeID = employeeDetail.EmployeeID,
+                Gender = employeeDetail.Gender,
+                MaritalStatus = employeeDetail.MaritalStatus,
+                Nationality = employeeDetail.Nationality
             };
             _context.Add(newDetail);
             _context.SaveChanges();
@@ -53,6 +56,9 @@ namespace TimeAndBilling.Models.Repository
             updateEmployeeDetails.PhoneNumber = employeeDetail.PhoneNumber;
             updateEmployeeDetails.PostalCode = employeeDetail.PostalCode;
             updateEmployeeDetails.ProvinceState = employeeDetail.ProvinceState;
+            updateEmployeeDetails.Gender = employeeDetail.Gender;
+            updateEmployeeDetails.MaritalStatus = employeeDetail.MaritalStatus;
+            updateEmployeeDetails.Nationality = employeeDetail.Nationality;
 
             _context.Update(updateEmployeeDetails);
             _context.SaveChanges();

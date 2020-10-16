@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Security.Policy;
 using System.Threading.Tasks;
 
 namespace TimeAndBilling.Models
@@ -48,5 +49,18 @@ namespace TimeAndBilling.Models
         //Manager
         public string Manager { get; set; }
 
+        //Social Insurance Number
+        [Display(Name ="SSN")]
+        public string SSN { get; set; }
+
+        //Employee Number (auto generated)
+        [Display(Name ="Employee Number")]
+        [Required(ErrorMessage ="Please enter a unique employee number")]
+        public string EmployeeNumber { get; set; }
+
+        //Work Email (auto generated)
+        [Display(Name ="Work Email")]
+        [Required(ErrorMessage ="Please enter a unique email address")]
+        public string WorkEmail { get; set; }
     }
 }
