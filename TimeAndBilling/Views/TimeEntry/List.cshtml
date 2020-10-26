@@ -1,15 +1,52 @@
 ﻿@model TimeEntryViewModel
 
-<h1> Time Entry Listing</h1>
-
-<div>
-    <a class="btn btn-primary" asp-controller="TimeEntry" asp-action="Add" role="button">Add New Time Entry</a>
-</div>
+<h1> Time Entry</h1>
 
 <div>
     <p>@DateTime.Today.ToString("MMMM dd, yyyy") </p>
 </div>
 
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" asp-action="Add" role="form">
+            <div class="form-group" hidden>
+                <label asp-for="TimeEntry.EmployeeID" class="control-label"></label>
+                <input asp-for="TimeEntry.EmployeeID" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="TimeEntry.Project" class="control-label"></label>
+                <select asp-for="TimeEntry.ProjectID" class="form-control" asp-items="ViewBag.ProjectID">
+                    <option value="">-- Select Project --</option>
+                </select>
+                <span asp-validation-for="TimeEntry.ProjectID" class="text-danger" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="TimeEntry.Description" class="control-label"></label>
+                <input asp-for="TimeEntry.Description" class="form-control" />
+                <span asp-validation-for="TimeEntry.Description" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="TimeEntry.Hours" class="control-label"></label>
+                <input asp-for="TimeEntry.Hours" class="form-control" />
+                <span asp-validation-for="TimeEntry.Hours" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TimeEntry.Date" class="control-label"></label>
+                <input asp-for="TimeEntry.Date" class="form-control" />
+                <span asp-validation-for="TimeEntry.Date" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-5">
+                    <input type="submit" class="btn btn-primary" value="Add" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 
 <table class="table table-hover table-sm">
     <thead>
@@ -21,16 +58,14 @@
         @foreach (var entry in Model.TimeEntries)
         {
             <tr class="table-row">
-                <td> @entry.EmployeeID</td>
-                <td> @entry.Employee</td>
-                <td> @entry.Project </td>
+                <td> @entry.Project.ProjectName </td>
                 <td> @entry.Hours</td>
                 <td> @entry.Description</td>
                 <td>
                     <div class="Edit">
                         <p class="button">
                             <a class="btn btn-info"
-                               asp-controller="Project"
+                               asp-controller="TimeEntry"
                                asp-action="Edit"
                                asp-route-Id="@entry.TimeEntryID">Edit</a>
                         </p>
@@ -40,7 +75,7 @@
                     <div class="Delete">
                         <p class="button">
                             <a class="btn btn-info"
-                               asp-controller="Project"
+                               asp-controller="TimeEntry"
                                asp-action="Delete"
                                asp-route-Id="@entry.TimeEntryID">Delete</a>
                         </p>
@@ -50,3 +85,6 @@
         }
     </tbody>
 </table>
+<div>
+    @ViewBag.NumberOfHours
+</div>

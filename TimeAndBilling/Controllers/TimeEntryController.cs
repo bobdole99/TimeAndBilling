@@ -5,23 +5,19 @@ using TimeAndBilling.Models.Repository;
 using TimeAndBilling.Models.Repository.Interfaces;
 using System.Linq;
 using TimeAndBilling.ViewModels;
-using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System;
+using System.Runtime.InteropServices.ComTypes;
 
 namespace TimeAndBilling.Controllers
 {
     public class TimeEntryController : Controller
     {
         private readonly IProjectRepository _projectRepository;
-        private readonly IEmployeeRepository _employeeRepository;
         private readonly ITimeEntryRepository _timeEntryRepository;
 
-        public TimeEntryController(IProjectRepository projectRepository,
-                                    IEmployeeRepository employeeRepository,
-                                    ITimeEntryRepository timeEntryRepository)
+        public TimeEntryController(IProjectRepository projectRepository, ITimeEntryRepository timeEntryRepository)
         {
-            _employeeRepository = employeeRepository;
             _projectRepository = projectRepository;
             _timeEntryRepository = timeEntryRepository;
         }
@@ -29,45 +25,74 @@ namespace TimeAndBilling.Controllers
         public IActionResult List()
         {
             IEnumerable<TimeEntry> timeEntries = _timeEntryRepository.GetAllTimeEntries;
+            PopulateProjectDropDown();
 
             ViewBag.Date = DateTime.Today;
+            TimeEntry timeEntry = new TimeEntry();
+            timeEntry.Date = DateTime.Today;
+
+            ViewBag.NumberOfHours = GetNumberOfHours();
 
             return View(new TimeEntryViewModel
             {
-                TimeEntries = timeEntries
+                TimeEntries = timeEntries,
+                TimeEntry = timeEntry
             });
 
         }
 
-        public IActionResult Delete()
+        public IActionResult Delete(int? timeEntryID)
         {
-            return null;
-        }
-
-        public IActionResult Edit()
-        {
-            return null;
-        }
-
-        public IActionResult Add()
-        {
-            PopulateEmployeeDropDown();
-            PopulateProjectDropDown();
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult Add(TimeEntry timeEntry)
-        {
-            if (!ModelState.IsValid)
+            var entry = _timeEntryRepository.GetAllTimeEntries.FirstOrDefault(t => t.TimeEntryID == timeEntryID);
+            if (entry != null)
             {
+                _timeEntryRepository.DeleteTimeEntry(entry.TimeEntryID);
+            }
+            return RedirectToAction("List");
+        }
+
+
+        public IActionResult Save(TimeEntry timeEntry)
+        {
+            if (timeEntry != null)
+            {
+                _timeEntryRepository.UpdateTimeEntry(timeEntry);
+            }
+            return RedirectToAction("List");
+        }
+
+
+        public IActionResult Edit(int? id)
+        {
+            if (id.HasValue)
+            {
+                var timeEntry = _timeEntryRepository.GetAllTimeEntries.FirstOrDefault(t => t.TimeEntryID == id);
+                PopulateProjectDropDown(timeEntry.ProjectID);
                 return View(timeEntry);
             }
             else
             {
-                _timeEntryRepository.AddNewTimeEntry(timeEntry);
+                return RedirectToAction("List");
             }
+        }
 
+
+        //NOTE: When adding a new time entry the employee ID is for now hard coded to 1
+        [HttpPost]
+        public IActionResult Add(TimeEntryViewModel timeEntryViewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(timeEntryViewModel);
+            }
+            else
+            {
+                //Remove this hard coded employee ID to the employee ID that is logged in
+                //Leave this change for later
+                timeEntryViewModel.TimeEntry.EmployeeID = 1;
+                _timeEntryRepository.AddNewTimeEntry(timeEntryViewModel.TimeEntry);
+            }
+            PopulateProjectDropDown();
             return RedirectToAction("List");
         }
 
@@ -79,12 +104,14 @@ namespace TimeAndBilling.Controllers
             ViewBag.ProjectID = new SelectList(projects, "ProjectID", "ProjectName", selectedProject);
         }
 
-        private void PopulateEmployeeDropDown(object selectedEmployee = null)
+        //Update this later to only show for user logged in
+        //add number of work hours in config rather than hard coding it to 8
+        private decimal GetNumberOfHours()
         {
-            var employees = from e in _employeeRepository.GetAllEmployees
-                            orderby e.FirstName
-                            select e;
-            ViewBag.EmployeeID = new SelectList(employees, "EmployeeID", "FirstName", selectedEmployee);
+            var timeEntries = _timeEntryRepository.GetAllTimeEntries
+                .Where(te => te.Date >= DateTime.Today && te.Date <= DateTime.Today.AddDays(1))
+                .Sum(te => te.Hours);
+            return timeEntries;
         }
     }
 }

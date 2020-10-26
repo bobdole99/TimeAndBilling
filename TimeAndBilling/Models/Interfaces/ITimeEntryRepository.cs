@@ -10,7 +10,8 @@ namespace TimeAndBilling.Models.Repository.Interfaces
         IEnumerable<TimeEntry> GetAllTimeEntries { get;}
 
         TimeEntry AddNewTimeEntry(TimeEntry timeEntry);
-        TimeEntry DeleteTimeEntry(TimeEntry timeEntry);
+        void DeleteTimeEntry(int? timeEntryID);
+        TimeEntry UpdateTimeEntry(TimeEntry timeEntry);
         
     }
 }

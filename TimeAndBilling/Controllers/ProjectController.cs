@@ -26,6 +26,8 @@ namespace TimeAndBilling.Controllers
         [HttpPost]
         public IActionResult Add(Project project)
         {
+
+            var errors = ModelState.Values.SelectMany(v => v.Errors);
             if (!ModelState.IsValid)
             {
                 return View(project);

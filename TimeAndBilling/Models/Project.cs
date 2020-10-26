@@ -9,7 +9,7 @@ namespace TimeAndBilling.Models
     //Add a new project
     public class Project
     {
-        public int ProjectID { get; set; }
+        public int? ProjectID { get; set; }
 
         //Project name
         [Required(ErrorMessage = "Please enter a project name")]

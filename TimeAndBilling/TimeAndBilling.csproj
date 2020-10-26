@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Models\Tools\" />
     <Folder Include="sql\" />
   </ItemGroup>
 

@@ -12,6 +12,6 @@ namespace TimeAndBilling.ViewModels
     {
         public IEnumerable<TimeEntry> TimeEntries { get; set; }
 
-        //public TimeEntry TimeEntry { get; set; }
+        public TimeEntry TimeEntry { get; set; }
     }
 }

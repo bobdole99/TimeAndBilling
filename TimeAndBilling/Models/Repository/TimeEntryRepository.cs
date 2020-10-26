@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using TimeAndBilling.Models.Repository.Interfaces;
 
 namespace TimeAndBilling.Models.Repository
@@ -25,8 +23,6 @@ namespace TimeAndBilling.Models.Repository
             TimeEntry newTimeEntry = new TimeEntry
             {
                 Description = timeEntry.Description,
-                Employee = timeEntry.Employee,
-                Project = timeEntry.Project,
                 Hours = timeEntry.Hours,
                 ProjectID = timeEntry.ProjectID,
                 EmployeeID = timeEntry.EmployeeID,
@@ -38,13 +34,28 @@ namespace TimeAndBilling.Models.Repository
             return newTimeEntry;
         }
 
-        public TimeEntry DeleteTimeEntry(TimeEntry timeEntry)
+        public void DeleteTimeEntry(int? timeEntryID)
         {
-            var deleteTimeEntry = _context.TimeEntries.FirstOrDefault(te => te.TimeEntryID == timeEntry.TimeEntryID);
+            var deleteTimeEntry = _context.TimeEntries.FirstOrDefault(te => te.TimeEntryID == timeEntryID);
             _context.Remove(deleteTimeEntry);
             _context.SaveChanges();
+        }
 
-            return deleteTimeEntry;
+
+        public TimeEntry UpdateTimeEntry(TimeEntry timeEntry)
+        {
+            var updateTimeEntry = _context.TimeEntries.FirstOrDefault(te => te.TimeEntryID == timeEntry.TimeEntryID);
+            if (updateTimeEntry != null)
+            {
+                updateTimeEntry.Date = timeEntry.Date;
+                updateTimeEntry.Description = timeEntry.Description;
+                updateTimeEntry.Hours = timeEntry.Hours;
+                updateTimeEntry.ProjectID = timeEntry.ProjectID;
+            }
+
+            _context.Update(updateTimeEntry);
+            _context.SaveChanges();
+            return updateTimeEntry;
         }
     }
 }
