@@ -18,7 +18,6 @@ namespace TimeAndBilling.Models.Repository
         public Project AddNewProject(Project project);
         public Project DeleteProject(int? projectId);
         public Project UpdateProject(Project project);
-        IEnumerable<SelectListItem> GetProjectsDropDown();
 
     }
 }

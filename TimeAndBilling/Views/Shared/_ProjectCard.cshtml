@@ -6,20 +6,77 @@
 
 </div>
 
-<div class="form-group">
-    <label asp-for="ProjectName" class="control-label"></label>
-    <input asp-for="ProjectName" class="form-control" />
-    <span asp-validation-for="ProjectName" class="text-danger"></span>
+<div class="container">
+    <div class="row my-5">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="ProjectName" class="control-label"></label>
+                <input asp-for="ProjectName" class="form-control" />
+                <span asp-validation-for="ProjectName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="ProjectCode" class="control-label"></label>
+                <input asp-for="ProjectCode" class="form-control" />
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="ProjectDescription" class="control-label"></label>
+                <input asp-for="ProjectDescription" class="form-control" />
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row my-5">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="ProjectManager" class="control-label"></label>
+                <input asp-for="ProjectManager" class="form-control" />
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="ProjectContactEmail" class="control-label"></label>
+                <input asp-for="ProjectContactEmail" class="form-control" />
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="ProjectContactPhone" class="control-label"></label>
+                <input asp-for="ProjectContactPhone" class="form-control" />
+            </div>
+        </div>
+    </div>
+
+    <div class="row my-5">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="EstimatedProjectHours" class="control-label"></label>
+                <input asp-for="EstimatedProjectHours" class="form-control" />
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="ActualProjectHours" class="control-label"></label>
+                <input asp-for="ActualProjectHours" class="form-control" />
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="BillableHours" class="control-label"></label>
+                <input asp-for="BillableHours" class="form-control" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-1">
+            <div class="form-group">
+                <label asp-for="Completed" class="control-label"></label>
+                <input asp-for="Completed" class="form-control" />
+            </div>
+        </div>
+    </div>
 </div>
-
-<div class="form-group">
-    <label asp-for="ProjectCode" class="control-label"></label>
-    <input asp-for="ProjectCode" class="form-control" />
-</div>
-
-<div class="form-group">
-    <label asp-for="ProjectDescription" class="control-label"></label>
-    <input asp-for="ProjectDescription" class="form-control" />
-</div>
-
-

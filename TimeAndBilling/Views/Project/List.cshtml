@@ -1,16 +1,26 @@
 ﻿@model ProjectViewModel
 
-<h1> Project Listing</h1>
-<!-- Search form -->
-<div>
-    <div class="form-group">
-        <form class="form-group" method="post" asp-controller="Project" asp-action="List">
-            <input class="form-control" type="text" placeholder="Search" name="searchString">
-            <input class="btn btn-primary" type="submit" value="Search" />
-        </form>
-    </div>
-    <div>
-        <a class="btn btn-primary" asp-controller="Project" asp-action="Add" role="button">Add New Project</a>
+<h1> Projects</h1>
+
+<div class="container">
+
+    <form class="form-group" method="post" asp-controller="Project" asp-action="List">
+        <div class="row">
+            <div class="col-md-10">
+                <input class="form-control" type="text" placeholder="Search" name="searchString">
+            </div>
+            <div class="col-md-2">
+                <input class="btn btn-primary" type="submit" value="Search" />
+            </div>
+        </div>
+    </form>
+
+    <div class="row mt-3 mb-1">
+        <div class="col-md-2">
+            <div>
+                <a class="btn btn-primary" asp-controller="Project" asp-action="Edit" role="button">Add New Project</a>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -20,10 +30,12 @@
             <th scope="col">Project Code</th>
             <th scope="col">Project Name</th>
             <th scope="col">Project Description</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
         </tr>
     </thead>
     <tbody>
-        @if (Model.Projects.Count() == 0) @ViewBag.SearchResults 
+        @if (Model.Projects.Count() == 0)@ViewBag.SearchResults
         @foreach (var project in Model.Projects)
         {
             <tr class="table-row">

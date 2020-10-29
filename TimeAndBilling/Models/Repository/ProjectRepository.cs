@@ -22,7 +22,14 @@ namespace TimeAndBilling.Models.Repository
             {
                 ProjectCode = project.ProjectCode,
                 ProjectDescription = project.ProjectDescription,
-                ProjectName = project.ProjectName
+                ProjectName = project.ProjectName,
+                ProjectContactEmail = project.ProjectContactEmail,
+                ProjectContactPhone = project.ProjectContactPhone,
+                ActualProjectHours = project.ActualProjectHours,
+                BillableHours = project.BillableHours,
+                Completed = project.Completed,
+                EstimatedProjectHours = project.EstimatedProjectHours,
+                ProjectManager = project.ProjectManager,
             };
 
             _context.Add(newProject);
@@ -40,6 +47,13 @@ namespace TimeAndBilling.Models.Repository
                 updateProject.ProjectCode = project.ProjectCode;
                 updateProject.ProjectDescription = project.ProjectDescription;
                 updateProject.ProjectName = project.ProjectName;
+                updateProject.ProjectManager = project.ProjectManager;
+                updateProject.ProjectContactEmail = project.ProjectContactEmail;
+                updateProject.ProjectContactPhone = project.ProjectContactPhone;
+                updateProject.ActualProjectHours = project.ActualProjectHours;
+                updateProject.BillableHours = project.BillableHours;
+                updateProject.EstimatedProjectHours = project.EstimatedProjectHours;
+                updateProject.Completed = project.Completed;
             }
 
             _context.Update(updateProject);
@@ -75,11 +89,6 @@ namespace TimeAndBilling.Models.Repository
         {
             var project = _context.Projects.FirstOrDefault(p => p.ProjectID == projectId);
             return project;
-        }
-
-        public IEnumerable<SelectListItem> GetProjectsDropDown()
-        {
-            throw new NotImplementedException();
         }
     }
 }

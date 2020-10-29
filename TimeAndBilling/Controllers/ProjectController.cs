@@ -18,27 +18,6 @@ namespace TimeAndBilling.Controllers
             _projectRepository = projectRepository;
         }
 
-        public IActionResult Add()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult Add(Project project)
-        {
-
-            var errors = ModelState.Values.SelectMany(v => v.Errors);
-            if (!ModelState.IsValid)
-            {
-                return View(project);
-            }
-            else
-            {
-                _projectRepository.AddNewProject(project);
-            }
-
-            return RedirectToAction("List");
-        }
 
         public IActionResult Update(Project project)
         {
@@ -55,18 +34,20 @@ namespace TimeAndBilling.Controllers
 
         public IActionResult Edit(int? id)
         {
-            if (!id.HasValue)
+            var project = _projectRepository.GetProjectById(id);
+            if (project == null)
             {
-                return View();
+                return View(new Project());
             }
             else
             {
-                var project = _projectRepository.GetProjectById(id.Value);
                 return View(project);
             }
         }
 
 
+        // TODO: Remove the Project View Model for this and just pass the the emuerable into the list view
+        //Use a Project view model for the edit page
         public IActionResult List(string searchString)
         {
             IEnumerable<Project> projects;
