@@ -1,0 +1,69 @@
+﻿@model ProjectTaskViewModel
+
+    <div class="container">
+        <div class="form-group" hidden>
+            <label asp-for="ProjectTask.ProjectTaskID" class="control-label"></label>
+            <input asp-for="ProjectTask.ProjectTaskID" class="form-control" />
+        </div>
+        <div class="form-group" hidden>
+            <label asp-for="ProjectTask.ProjectID" class="control-label"></label>
+            <input asp-for="ProjectTask.ProjectID" class="form-control" />
+
+        </div>
+
+
+        <div class="row py-0">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="ProjectTask.TaskName" class="control-label"></label>
+                    <input asp-for="ProjectTask.TaskName" class="form-control" />
+                    <span asp-validation-for="ProjectTask.TaskName" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="ProjectTask.TaskOwner" class="control-label"></label>
+                    <input asp-for="ProjectTask.TaskOwner" class="form-control" />
+                </div>
+            </div>
+        </div>
+
+        <div class="row py-0">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label asp-for="ProjectTask.TaskDescription" class="control-label"></label>
+                    <input asp-for="ProjectTask.TaskDescription" class="form-control" />
+                </div>
+            </div>
+        </div>
+
+        <div class="row py-0">
+            <div class="col-md-4 w-25">
+                <div class="form-group">
+                    <label asp-for="ProjectTask.CurrentHours" class="control-label"></label>
+                    <input asp-for="ProjectTask.CurrentHours" class="form-control" />
+                </div>
+            </div>
+            <div class="col-md-4 w-25">
+                <div class="form-group">
+                    <label asp-for="ProjectTask.EstimatedHours" class="control-label"></label>
+                    <input asp-for="ProjectTask.EstimatedHours" class="form-control" />
+                </div>
+            </div>
+            <div class="col-md-4 w-25">
+                <div class="form-group">
+                    <label asp-for="ProjectTask.CurrentHours" class="control-label"></label>
+                    <input asp-for="ProjectTask.CurrentHours" class="form-control" />
+                </div>
+            </div>
+        </div>
+
+        <div class="row py-0">
+            <div class="col-md-1 w-25">
+                <div class="form-group">
+                    <label asp-for="ProjectTask.Completed" class="control-label"></label>
+                    <input asp-for="ProjectTask.Completed" class="form-control" />
+                </div>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,17 @@
+﻿
+<form method="post" asp-action="Edit" role="form">
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <input type="submit" class="nav-link active" asp-controller="Employee" asp-action="Edit" asp-route-id="@Model.EmployeeID" value="Employee" />
+        </li>
+        <li class="nav-item">
+            <input type="submit" class="nav-link active" asp-controller="EmployeeDetail" asp-action="Edit" asp-route-id="@Model.EmployeeID" value="Employee Detail" />
+        </li>
+        <li class="nav-item">
+            <input type="submit" class="nav-link active" asp-controller="EmploymentDetail" asp-action="Edit" asp-route-id="@Model.EmployeeID" value="Employment Detail" />
+        </li>
+        <li class="nav-item">
+            <input type="submit" class="nav-link active" asp-controller="EmployeeBanking" asp-action="Edit" asp-route-id="@Model.EmployeeID" value="Employee Banking" />
+        </li>
+    </ul>
+</form>

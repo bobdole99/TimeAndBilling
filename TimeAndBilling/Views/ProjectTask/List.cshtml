@@ -1,0 +1,53 @@
+﻿@model ProjectTaskViewModel
+
+<partial name="_ProjectTaskCard" />
+
+        <form method="post" asp-action="Add" role="form">
+            <div class="form-group">
+                    <input type="submit" class="btn btn-primary" value="Add" asp-controller="ProjectTask" asp-action="Add" />
+
+            </div>
+        </form>
+
+
+<table class="table table-hover table-sm">
+    <thead>
+        <tr>
+            <th scope="col">Task Name</th>
+            <th scope="col">Description</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.ProjectTasks != null)
+        {
+            @foreach (var projectTask in Model.ProjectTasks)
+            {
+                <tr class="table-row">
+                    <td> @projectTask.TaskName</td>
+                    <td> @projectTask.TaskDescription</td>
+                    <td>
+                        <div class="Edit">
+                            <p class="button">
+                                <a class="btn btn-info"
+                                   asp-controller="ProjectTask"
+                                   asp-action="Edit"
+                                   asp-route-Id="@projectTask.ProjectTaskID">Edit</a>
+                            </p>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="Delete">
+                            <p class="button">
+                                <a class="btn btn-info"
+                                   asp-controller="ProjectTask"
+                                   asp-action="Delete"
+                                   asp-route-Id="@projectTask.ProjectTaskID">Delete</a>
+                            </p>
+                        </div>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
