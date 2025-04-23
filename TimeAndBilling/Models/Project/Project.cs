@@ -36,15 +36,15 @@ namespace TimeAndBilling.Models
 
         //Estimated Project Hours
         [Display(Name ="Estimated Project Hours")]
-        public double EstimatedProjectHours { get; set; }
+        public double? EstimatedProjectHours { get; set; }
 
         //Actual Project Hours
         [Display(Name ="Actual Project Hours")]
-        public double ActualProjectHours { get; set; }
+        public double? ActualProjectHours { get; set; }
 
         //Billable Hours
         [Display(Name ="Billable Hours")]
-        public double BillableHours { get; set; }
+        public double? BillableHours { get; set; }
 
         //Completed
         public bool Completed { get; set; }

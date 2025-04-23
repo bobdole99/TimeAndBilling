@@ -18,7 +18,27 @@ namespace TimeAndBilling.Controllers
             _projectRepository = projectRepository;
         }
 
+        public IActionResult Add()
+        {
+            return View();
+        }
 
+        [HttpPost]
+        public IActionResult Add(Project project)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(project);
+            }
+            else
+            {
+                _projectRepository.AddNewProject(project);
+            }
+            return RedirectToAction("List");
+        }
+
+
+        [HttpPost]
         public IActionResult Update(Project project)
         {
             if (!ModelState.IsValid)

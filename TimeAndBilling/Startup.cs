@@ -15,6 +15,7 @@ using TimeAndBilling.Models.Interfaces;
 using TimeAndBilling.Models.Repository;
 using TimeAndBilling.Models.Repository.Interfaces;
 
+
 namespace TimeAndBilling
 {
     public class Startup
@@ -70,6 +71,13 @@ namespace TimeAndBilling
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+
+            using (var scope = app.ApplicationServices.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                SeedEmployeeData.Initialize(services);
+                SeedProjectData.Intialize(services);
+            }
         }
 
         private void AddEmployeeServices(IServiceCollection services)
