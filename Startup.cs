@@ -75,6 +75,8 @@ namespace TimeAndBilling
             using (var scope = app.ApplicationServices.CreateScope())
             {
                 var services = scope.ServiceProvider;
+                var context = services.GetRequiredService<AppDbContext>();
+                context.Database.Migrate();
                 SeedEmployeeData.Initialize(services);
                 SeedProjectData.Intialize(services);
             }
